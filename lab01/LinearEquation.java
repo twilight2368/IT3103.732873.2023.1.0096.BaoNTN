@@ -16,8 +16,6 @@ public class LinearEquation {
         System.out.print("Input: ");
         a = myScanner.nextInt();
 
-        myScanner.close();
-
         switch (a) {
             case 1:
                 firstDegreeEquationOneVariable();
@@ -32,7 +30,7 @@ public class LinearEquation {
                 break;
         }
 
-
+         myScanner.close();
     }
 
     public static void firstDegreeEquationOneVariable(){
