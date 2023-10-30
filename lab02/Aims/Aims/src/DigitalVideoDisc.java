@@ -52,7 +52,7 @@ public class DigitalVideoDisc {
 	}
 
 	public static void showAllDVDs() {
-		for (DigitalVideoDisc digitalVideoDisc : allDVDs) {
+		for (DigitalVideoDisc digitalVideoDisc : allDVDs.reversed()) {
 			System.out.println(digitalVideoDisc);
 		}
 	}
@@ -87,6 +87,61 @@ public class DigitalVideoDisc {
 				System.out.println(digitalVideoDisc);
 			}
 		}
+	}
+	
+	public static DigitalVideoDisc searchDVD(String titleinput) {
+		for (DigitalVideoDisc digitalVideoDisc : allDVDs) {
+			if (digitalVideoDisc.getTitleString().toLowerCase().equals(titleinput.toLowerCase())) {
+				return digitalVideoDisc;
+			}
+		}
+		return null;
+	}
+	/** Calculate total cost*/
+	public double totalCost() {
+		double cost = 0;
+		for (DigitalVideoDisc digitalVideoDisc : allDVDs) {
+			cost = cost + digitalVideoDisc.getCost();
+		}		
+		return cost;
+	}
+	
+	//ALL CONSTRUCTORS FOR DigitalVideoDisc class
+	public DigitalVideoDisc(String titleString, String categoryString, String directorString, int length, float cost) {
+		super();
+		this.titleString = titleString;
+		this.categoryString = categoryString;
+		this.directorString = directorString;
+		this.length = length;
+		this.cost = cost;
+	}
+	
+	public DigitalVideoDisc(String titleString, String categoryString, int length, float cost) {
+		super();
+		this.titleString = titleString;
+		this.categoryString = categoryString;
+		this.length = length;
+		this.cost = cost;
+	}
+
+	public DigitalVideoDisc(String titleString) {
+		super();
+		this.titleString = titleString;
+	}
+
+	public DigitalVideoDisc(String titleString, String categoryString, float cost) {
+		super();
+		this.titleString = titleString;
+		this.categoryString = categoryString;
+		this.cost = cost;
+	}
+
+	public DigitalVideoDisc(String titleString, String categoryString, String directorString, float cost) {
+		super();
+		this.titleString = titleString;
+		this.categoryString = categoryString;
+		this.directorString = directorString;
+		this.cost = cost;
 	}
 
 	@Override
