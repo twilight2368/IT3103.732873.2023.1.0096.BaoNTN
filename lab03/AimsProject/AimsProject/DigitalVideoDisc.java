@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 public class DigitalVideoDisc {
 	private String title;
@@ -53,6 +54,16 @@ public class DigitalVideoDisc {
 		this.director = director;
 		this.length = length;
 		this.cost = cost;
+	}
+
+	
+
+	public boolean equals(DigitalVideoDisc disc) {
+		if (title.equals(disc.getTitle())) {
+			return true;
+		}
+		
+		return false;
 	}
 		
 
