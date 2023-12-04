@@ -1,3 +1,4 @@
+package hust.soict.dsai.test.cart;
 import java.util.Scanner;
 
 import hust.soict.dsai.aims.cart.Cart;
