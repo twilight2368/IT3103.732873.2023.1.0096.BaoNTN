@@ -87,7 +87,24 @@ public class DigitalVideoDisc {
 		nbDigitalVideoDiscs++;
 	}
 
+
+	@Override
+	public String toString() {
+		return "DVD: " 
+				+ "[" + title + "]" 
+				+ "[" + category + "]" 
+				+ "[" + director + "]" 
+				+ "[" + length + "]"
+				+ ":[" + cost + "]";
+	}
 	
+	public boolean isMatchTitile(String title) {
+		return this.title.toUpperCase().equals(title.toUpperCase());
+	}
+	
+	public boolean isMatchID(int id) {
+		return idDigitalVideoDiscs == id;
+	}
 
 	public boolean equals(DigitalVideoDisc disc) {
 		if (title.equals(disc.getTitle())) {
