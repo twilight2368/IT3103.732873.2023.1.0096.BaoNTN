@@ -1,0 +1,6 @@
+
+public class Store {
+	public static final int MAX_NUMBER_ORDERED = 100;
+	private static DigitalVideoDisc itemOrdered[] = new DigitalVideoDisc[MAX_NUMBER_ORDERED];
+	
+}
