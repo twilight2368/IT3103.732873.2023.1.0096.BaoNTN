@@ -1,7 +1,8 @@
 package hust.soict.dsai.aims.media;
+
 import java.util.Objects;
 
-public class DigitalVideoDisc extends Media {
+public class DigitalVideoDisc extends Media implements Playable {
 	private String director;
 	private int length;
 	private static int nbDigitalVideoDiscs = 0;
@@ -23,27 +24,27 @@ public class DigitalVideoDisc extends Media {
 		this.length = length;
 	}
 
-	public DigitalVideoDisc(int id ,String title) {
+	public DigitalVideoDisc(int id, String title) {
 		super();
 
 		this.idDigitalVideoDiscs = nbDigitalVideoDiscs;
 		nbDigitalVideoDiscs++;
 	}
 
-	public DigitalVideoDisc(int id ,String title, String category, float cost) {
+	public DigitalVideoDisc(int id, String title, String category, float cost) {
 		super();
 		this.idDigitalVideoDiscs = nbDigitalVideoDiscs;
 		nbDigitalVideoDiscs++;
 	}
 
-	public DigitalVideoDisc(int id ,String title, String category, String director, float cost) {
+	public DigitalVideoDisc(int id, String title, String category, String director, float cost) {
 		super();
 		this.director = director;
 		this.idDigitalVideoDiscs = nbDigitalVideoDiscs;
 		nbDigitalVideoDiscs++;
 	}
 
-	public DigitalVideoDisc(int id ,String title, String category, String director, int length, float cost) {
+	public DigitalVideoDisc(int id, String title, String category, String director, int length, float cost) {
 		super();
 		this.director = director;
 		this.length = length;
@@ -51,32 +52,49 @@ public class DigitalVideoDisc extends Media {
 		nbDigitalVideoDiscs++;
 	}
 
-
 	@Override
 	public String toString() {
-		return "DVD: " 
-				+ "[" + title + "]" 
-				+ "[" + category + "]" 
-				+ "[" + director + "]" 
-				+ "[" + length + "]"
-				+ ":[" + cost + "]";
+		return "DVD: " + "[" + getTitle() + "]" + "[" + getCategory() + "]" + "[" + getDirector() + "]" + "[" + length
+				+ "]" + ":[" + getCost() + "]";
 	}
-	
+
 	public boolean isMatchTitile(String title) {
-		return this.title.toUpperCase().equals(title.toUpperCase());
+		return getTitle().toUpperCase().equals(title.toUpperCase());
 	}
-	
+
 	public boolean isMatchID(int id) {
 		return idDigitalVideoDiscs == id;
 	}
 
 	public boolean equals(DigitalVideoDisc disc) {
-		if (title.equals(disc.getTitle())) {
+		if (getTitle().equals(disc.getTitle())) {
 			return true;
 		}
-		
+
 		return false;
 	}
-		
+
+	// play implement from Interface Playable
+	public void play() {
+		System.out.println("Playing DVD: " + this.getTitle()); 
+		System.out.println("DVD length: " + this.getLength()); 
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
