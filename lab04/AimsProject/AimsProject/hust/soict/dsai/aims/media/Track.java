@@ -16,6 +16,18 @@ public class Track implements Playable {
 	public int getLength() {
 		return length;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Track other = (Track) obj;
+		return title.equals(other.getTitle()) && length == other.getLength() ;
+	}
 
 	// play implement from Interface Playable
 	public void play() {

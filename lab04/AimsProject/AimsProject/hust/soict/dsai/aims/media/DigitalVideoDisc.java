@@ -32,7 +32,7 @@ public class DigitalVideoDisc extends Media implements Playable {
 	}
 
 	public DigitalVideoDisc(int id, String title, String category, float cost) {
-		super();
+		super(id, title, category,cost);
 		this.idDigitalVideoDiscs = nbDigitalVideoDiscs;
 		nbDigitalVideoDiscs++;
 	}
@@ -51,6 +51,7 @@ public class DigitalVideoDisc extends Media implements Playable {
 		this.idDigitalVideoDiscs = nbDigitalVideoDiscs;
 		nbDigitalVideoDiscs++;
 	}
+	
 
 	@Override
 	public String toString() {

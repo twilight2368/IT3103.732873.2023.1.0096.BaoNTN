@@ -9,7 +9,19 @@ public class Book extends Media {
 	public Book() {
 		super();	
 	}
+	
+	public Book(int id, String title, String category, float cost) {
+		super(id, title, category,cost);	
+	}
+	
+	
 
+
+	@Override
+	public String toString() {
+		return "Book" + "[" + getId() + "]" + "[" + getTitle() + "]" + "[" +  getCategory() + "]" + "[" + getCost() + "]";
+	}
+	
 
 	public void addAuthor(String authorName) {
 		if (authors.contains(authorName)) {
