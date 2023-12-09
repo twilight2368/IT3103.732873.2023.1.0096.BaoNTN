@@ -47,38 +47,52 @@ public class Cart {
 	}
 	
 	
-//	public void printCart() {
-//		for (DigitalVideoDisc digitalVideoDisc : itemOrdered) {
-//			if (digitalVideoDisc != null) {
-//				System.out.println(digitalVideoDisc);
-//			}
-//		}
-//		System.out.println("Total cost: " + totalCost());
-//	}
+	public void printCart() {
+		for (Media media : itemOrder) {
+			if (media != null) {
+				System.out.println(media);
+			}
+		}
+		System.out.println("Total cost: " + totalCost());
+	}
 	
-//	public void searchByTitle(String input) {
-//		for (DigitalVideoDisc digitalVideoDisc : itemOrdered) {
-//			if (digitalVideoDisc == null) continue;
-//			if (digitalVideoDisc.isMatchTitile(input)) {
-//				System.out.println(digitalVideoDisc);
-//				return;
-//			}
-//		}
-//		
-//		System.out.println("404 not found");
-//	}
+	public void searchByTitle(String input) {
+		for (Media media : itemOrder) {
+			if (media == null) continue;
+			if (media.isMatchTitile(input)) {
+				System.out.println(media);
+				return;
+			}
+		}
+		
+		System.out.println("404 not found");
+	}
 	
-//	public void searchByID(int idInput) {
-//		for (DigitalVideoDisc digitalVideoDisc : itemOrdered) {
-//			if (digitalVideoDisc == null) continue;
-//			if (digitalVideoDisc.isMatchID(idInput)) {
-//				System.out.println(digitalVideoDisc);
-//				return;
-//			}
-//		}
-//		
-//		System.out.println("404 not found");
-//	}
+	public void searchByID(int idInput) {
+		for (Media media : itemOrder) {
+			if (media == null) continue;
+			if (media.isMatchID(idInput)) {
+				System.out.println(media);
+				return;
+			}
+		}
+		
+		System.out.println("404 not found");
+	}
 	
+	public Media searchByIDreturnMedia(int idInput) {
+		for (Media media : itemOrder) {
+			if (media == null) continue;
+			if (media.isMatchID(idInput)) {
+				System.out.println(media);
+				return media;
+			}
+		}
+		return null;
+	}
+	
+	public void removeAllMedia() {
+		itemOrder.removeAll(itemOrder);
+	}
 	
 }

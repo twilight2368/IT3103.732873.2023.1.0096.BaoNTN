@@ -11,6 +11,11 @@ public class CompactDisc extends Media implements Playable {
 		// TODO Auto-generated constructor stub
 		super();
 	}
+	
+	public CompactDisc(String title, String category, float cost) {
+		// TODO Auto-generated constructor stub
+		super(title, category, cost);
+	}
 
 	public String getArtist() {
 		return artist;

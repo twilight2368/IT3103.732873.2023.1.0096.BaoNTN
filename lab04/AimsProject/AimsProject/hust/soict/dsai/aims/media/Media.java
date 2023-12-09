@@ -7,10 +7,12 @@ import hust.soict.dsai.aims.compare.MediaComparatorByCostTitle;
 import hust.soict.dsai.aims.compare.MediaComparatorByTitleCost;
 
 public abstract class Media implements Comparable<Media> {
-	private int id; 
+	private int id = 0; 
 	private String title;
 	private String category;
 	private float cost;
+	
+	private static int id_unique = 0;
 	
 	
 	//Implement Comparators
@@ -19,14 +21,22 @@ public abstract class Media implements Comparable<Media> {
 	
 	
 	public Media() {
-
+		this.id = id_unique;
+		id_unique++;
+	}
+	
+	public Media(String title) {
+		this.title = title;
+		this.id = id_unique;
+		id_unique++;
 	}
     
-	public Media(int id, String title, String category, float cost) {
-		this.id = id;
+	public Media(String title, String category, float cost) {
 		this.title = title;
 		this.category = category;
 		this.cost = cost;
+		this.id = id_unique;
+		id_unique++;
 	}
 
 	public int getId() {
@@ -81,7 +91,14 @@ public abstract class Media implements Comparable<Media> {
 			return -1;
 		}
 	}
+	
+	public boolean isMatchTitile(String title) {
+		return getTitle().toUpperCase().equals(title.toUpperCase());
+	}
 
+	public boolean isMatchID(int id) {
+		return getId() == id;
+	}
 
 
 
