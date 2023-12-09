@@ -7,6 +7,11 @@ public class DigitalVideoDisc extends Media implements Playable {
 	private int length;
 	private static int nbDigitalVideoDiscs = 0;
 	private int idDigitalVideoDiscs = 0;
+	
+	public static void main(String[] args) {
+		DigitalVideoDisc digitalVideoDisc = new DigitalVideoDisc(1, "Tiger King", "Animal", 2.0f);
+		digitalVideoDisc.compareTo(digitalVideoDisc);
+	}
 
 	public String getDirector() {
 		return director;
@@ -80,6 +85,10 @@ public class DigitalVideoDisc extends Media implements Playable {
 		System.out.println("Playing DVD: " + this.getTitle()); 
 		System.out.println("DVD length: " + this.getLength()); 
 	}
+	
+	
+	
+
 
 }
 
