@@ -52,7 +52,7 @@ public class Aims {
 				cartMenuAims();
 				break;
 			case 0:
-				// back
+				endMenu = true;
 				break;
 			default:
 				System.out.println("Invalid input");
@@ -192,6 +192,7 @@ public class Aims {
 				cartMenuAims();
 				break;
 			case 0:
+				endMenu = true;
 				break;
 			default:
 				System.out.println("Inavalid input");
