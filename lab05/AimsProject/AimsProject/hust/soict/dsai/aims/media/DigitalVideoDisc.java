@@ -13,7 +13,7 @@ public class DigitalVideoDisc extends Media implements Playable {
 
 	public int getLength() {
 		return length;
-	}
+	}q
 
 	public void setDirector(String director) {
 		this.director = director;
