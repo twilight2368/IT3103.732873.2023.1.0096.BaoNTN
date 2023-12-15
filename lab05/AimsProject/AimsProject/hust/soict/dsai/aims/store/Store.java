@@ -46,6 +46,10 @@ public class Store {
 		return null;
 	}
 	
+	public static ArrayList<Media> getItemsInStore() {
+		return (ArrayList<Media>) itemOrdered;
+	}
+	
 	
 
 }
