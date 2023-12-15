@@ -77,10 +77,12 @@ public class NumberGrid extends JFrame {
 			if (button.charAt(0) >= '0' && button.charAt(0) <= '9') {
 				tfDisplay.setText(tfDisplay.getText() + button);
 			}else if (button.equals("DEL")) {
-				//handles the "DEL" case
-				tfDisplay.setText(tfDisplay.getText().substring(0, tfDisplay.getText().length() - 1));
+				//handles the "DEL" case: delete the last digit
+				if (tfDisplay.getText().length() >= 1) {
+					tfDisplay.setText(tfDisplay.getText().substring(0, tfDisplay.getText().length() - 1));
+				}
 			}else {
-				//handles the "C" case
+				//handles the "C" case: clears all digits 
 				tfDisplay.setText("");
 			}
 		}

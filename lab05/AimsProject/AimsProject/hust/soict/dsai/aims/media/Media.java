@@ -49,6 +49,13 @@ public abstract class Media implements Comparable<Media> {
 	}
 
 
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getCategory() {
 		return category;
 	}

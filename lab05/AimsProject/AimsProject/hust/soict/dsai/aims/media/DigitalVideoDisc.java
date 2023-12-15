@@ -22,7 +22,9 @@ public class DigitalVideoDisc extends Media implements Playable {
 	public void setLength(int length) {
 		this.length = length;
 	}
-
+	
+	
+	
 	public DigitalVideoDisc(String title) {
 		super(title);
 

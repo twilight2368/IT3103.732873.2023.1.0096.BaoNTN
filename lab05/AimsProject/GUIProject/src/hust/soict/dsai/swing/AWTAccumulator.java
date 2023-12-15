@@ -33,6 +33,7 @@ public class AWTAccumulator extends Frame {
 		setSize(350, 120);
 		setVisible(true);
 		
+		
 	}
 
 	public static void main(String[] args) {
