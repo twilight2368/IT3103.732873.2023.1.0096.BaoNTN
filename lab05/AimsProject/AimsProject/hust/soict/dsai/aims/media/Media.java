@@ -107,6 +107,11 @@ public abstract class Media implements Comparable<Media> {
 		return getId() == id;
 	}
 
+	@Override
+	public String toString() {
+		return "Media [title=" + title + ", category=" + category + ", cost=" + cost + "]";
+	}
+
 
 
 

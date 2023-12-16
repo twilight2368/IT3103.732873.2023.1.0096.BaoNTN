@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -14,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -22,6 +25,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Book;
 import hust.soict.dsai.aims.media.CompactDisc;
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
@@ -159,9 +163,13 @@ public class StoreScreen extends JFrame {
 			JPanel container = new JPanel();
 			container.setLayout(new FlowLayout(FlowLayout.CENTER));
 			
-			container.add(new JButton("Add to cart"));
+			JButton btnAddToCart = new JButton("Add to cart");
+			btnAddToCart.addActionListener(new ButtonListener(media));
+			container.add(btnAddToCart);
 			if (media instanceof Playable) {
-				container.add(new JButton("Play"));
+				JButton btnPlay = new JButton("Play");
+				btnPlay.addActionListener(new ButtonListener(media));
+				container.add(btnPlay);
 			}
 			
 			this.add(Box.createVerticalGlue());
@@ -172,6 +180,35 @@ public class StoreScreen extends JFrame {
 			
 			this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
+		}
+		
+		private class ButtonListener implements ActionListener{
+			Media media;
+						
+			public ButtonListener(Media media) {
+				super();
+				this.media = media;
+			}
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				String button = event.getActionCommand();
+				if (button.equals("Add to cart")) {
+					Cart cart = new Cart();
+					cart.addMedia(media);
+					JDialog dialog = new JDialog();
+					JLabel label = new JLabel("Added to cart");
+					dialog.add(label);
+					dialog.setSize(400,100);
+					dialog.setVisible(true);
+				}else if (button.equals("Play")) {
+					JDialog dialog = new JDialog();
+					JLabel label = new JLabel(media.toString());
+					dialog.add(label);
+					dialog.setSize(400,100);
+					dialog.setVisible(true);
+				}
+			}
 		}
 		
 		
