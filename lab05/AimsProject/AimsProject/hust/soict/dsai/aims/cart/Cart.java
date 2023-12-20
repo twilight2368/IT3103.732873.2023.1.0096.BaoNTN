@@ -8,47 +8,49 @@ import java.util.Scanner;
 
 import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
 	public static final int MAX_NUMBER_ORDERED = 20;
-	private List<Media> itemOrder = new ArrayList<Media>();
+	private ObservableList<Media> itemOrdered = FXCollections.observableArrayList();
 	
 	public void addMedia(Media media) {
-		if (itemOrder.contains(media)) {
+		if (itemOrdered.contains(media)) {
 			System.out.println("The item already in list");
 		}else {
-			itemOrder.add(media);
+			itemOrdered.add(media);
 			System.out.println("Added successfully");
 		}
 	}
 	
 	public void removeMedia(Media media) {
-		if (!itemOrder.contains(media)) {
+		if (!itemOrdered.contains(media)) {
 			System.out.println("The item not in list");
 		}else {
-			itemOrder.remove(media);
+			itemOrdered.remove(media);
 			System.out.println("Removed successfully");
 		}
 	}
 	public float totalCost() {
 		float cost = 0;
-		for (Media media : itemOrder) {
+		for (Media media : itemOrdered) {
 			cost = cost + media.getCost();
 		}
 		return cost;
 	}
 	
 	public void sortByCost() {
-		Collections.sort(itemOrder, Media.COMPARE_BY_COST_TITLE);
+		Collections.sort(itemOrdered, Media.COMPARE_BY_COST_TITLE);
 	}
 	
 	public void sortByTitle() {
-		Collections.sort(itemOrder, Media.COMPARE_BY_TITLE_COST);
+		Collections.sort(itemOrdered, Media.COMPARE_BY_TITLE_COST);
 	}
 	
 	
 	public void printCart() {
-		for (Media media : itemOrder) {
+		for (Media media : itemOrdered) {
 			if (media != null) {
 				System.out.println(media);
 			}
@@ -57,7 +59,7 @@ public class Cart {
 	}
 	
 	public void searchByTitle(String input) {
-		for (Media media : itemOrder) {
+		for (Media media : itemOrdered) {
 			if (media == null) continue;
 			if (media.isMatchTitile(input)) {
 				System.out.println(media);
@@ -69,7 +71,7 @@ public class Cart {
 	}
 	
 	public void searchByID(int idInput) {
-		for (Media media : itemOrder) {
+		for (Media media : itemOrdered) {
 			if (media == null) continue;
 			if (media.isMatchID(idInput)) {
 				System.out.println(media);
@@ -81,7 +83,7 @@ public class Cart {
 	}
 	
 	public Media searchByIDreturnMedia(int idInput) {
-		for (Media media : itemOrder) {
+		for (Media media : itemOrdered) {
 			if (media == null) continue;
 			if (media.isMatchID(idInput)) {
 				System.out.println(media);
@@ -92,7 +94,7 @@ public class Cart {
 	}
 	
 	public Media searchByIDreturnMedia(String input) {
-		for (Media media : itemOrder) {
+		for (Media media : itemOrdered) {
 			if (media == null) continue;
 			if (media.isMatchTitile(input)) {
 				System.out.println(media);
@@ -102,7 +104,11 @@ public class Cart {
 		return null;
 	}
 	public void removeAllMedia() {
-		itemOrder.removeAll(itemOrder);
+		itemOrdered.removeAll(itemOrdered);
+	}
+	
+	public ObservableList<Media> getItemsOrdered() {
+		return (ObservableList<Media>) itemOrdered;
 	}
 	
 }
