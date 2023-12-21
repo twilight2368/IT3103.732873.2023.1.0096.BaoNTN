@@ -1,5 +1,9 @@
 package hust.soict.dsai.aims.screen;
 
+import javafx.event.ActionEvent;
+
+import java.util.function.Predicate;
+
 import javax.swing.JFrame;
 
 import hust.soict.dsai.aims.cart.Cart;
@@ -7,12 +11,17 @@ import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 
 public class CartScreenController {
 	private Cart cart;
@@ -37,6 +46,15 @@ public class CartScreenController {
 
 	@FXML
 	private Button btnRemove;
+	
+    @FXML
+    private RadioButton radioBtnFilterId;
+
+    @FXML
+    private RadioButton radioBtnFilterTitle;
+
+    @FXML
+    private TextField tfFilter;
 
 	public CartScreenController(Cart cart) {
 		// TODO Auto-generated constructor stub
@@ -64,6 +82,12 @@ public class CartScreenController {
 			}
 		});
        
+		tfFilter.textProperty().addListener( new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> oservable, String oldValue, String newValue) {
+				showFilteredMedia(newValue);
+			}
+		});
 	}
 	
 	void updateButtonBar(Media media) {
@@ -74,4 +98,62 @@ public class CartScreenController {
 			btnPlay.setVisible(false);
 		}
 	}
+	
+    @FXML
+    void btnRemovePressed(ActionEvent event) {
+    	Media media = tblMedia.getSelectionModel().getSelectedItem();
+    	cart.removeMedia(media);
+    }
+    
+    void showFilteredMedia(String search){
+    	ObservableList<Media> sort_cartList = cart.getItemsOrdered();
+    	FilteredList<Media> filtedData = new FilteredList<>(sort_cartList);
+    	
+        filtedData.setPredicate(media -> {
+        	if (search == null || search.isEmpty() || search.length() == 0) {
+                return true;
+            }else {
+            	if (radioBtnFilterId.isSelected()) {
+    				return media.getId() == Integer.parseInt(search);
+    			}
+            	
+            	if (radioBtnFilterTitle.isSelected()) {
+    				return media.getTitle().toLowerCase().contains(search.toLowerCase());
+    			}
+            	
+            	return false;
+            }
+        });
+         
+       tblMedia.setItems(filtedData);
+       
+    		
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

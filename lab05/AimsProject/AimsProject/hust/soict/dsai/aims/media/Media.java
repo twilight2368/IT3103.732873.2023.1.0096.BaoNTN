@@ -12,7 +12,7 @@ public abstract class Media implements Comparable<Media> {
 	private String category;
 	private float cost;
 	
-	private static int id_unique = 0;
+	private static int id_unique = 1;
 	
 	
 	//Implement Comparators

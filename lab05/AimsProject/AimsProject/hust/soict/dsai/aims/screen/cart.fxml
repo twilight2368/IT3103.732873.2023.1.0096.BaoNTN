@@ -65,12 +65,12 @@
                </padding>
                <children>
                   <Label text="Filter" />
-                  <TextField />
-                  <RadioButton mnemonicParsing="false" selected="true" text="By ID">
+                  <TextField fx:id="tfFilter" />
+                  <RadioButton fx:id="radioBtnFilterId" mnemonicParsing="false" selected="true" text="By ID">
                      <toggleGroup>
                         <ToggleGroup fx:id="filterCategory" />
                      </toggleGroup></RadioButton>
-                  <RadioButton mnemonicParsing="false" text="By Title" toggleGroup="$filterCategory" />
+                  <RadioButton fx:id="radioBtnFilterTitle" mnemonicParsing="false" text="By Title" toggleGroup="$filterCategory" />
                </children>
             </HBox>
             <TableView fx:id="tblMedia" prefHeight="400.0" prefWidth="865.0">
@@ -88,7 +88,7 @@
                   <AnchorPane prefHeight="40.0" prefWidth="1050.0">
                      <children>
                         <Button fx:id="btnPlay" mnemonicParsing="false" text="Play" />
-                      <Button fx:id="btnRemove" layoutX="68.0" mnemonicParsing="false" text="Remove" />
+                      <Button fx:id="btnRemove" layoutX="68.0" mnemonicParsing="false" onAction="#btnRemovePressed" text="Remove" />
                      </children>
                   </AnchorPane>
               </buttons>
@@ -120,9 +120,6 @@
                <VBox.margin>
                   <Insets left="25.0" top="10.0" />
                </VBox.margin>
-               <font>
-                  <Font size="24.0" />
-               </font>
             </Button>
          </children>
       </VBox>
