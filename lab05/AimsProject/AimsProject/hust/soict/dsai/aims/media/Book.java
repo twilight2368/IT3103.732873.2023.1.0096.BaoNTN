@@ -3,7 +3,7 @@ package hust.soict.dsai.aims.media;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book extends Media implements Playable {
+public class Book extends Media {
 	private List<String> authors = new ArrayList<String>();
 	
 	public Book() {
@@ -40,9 +40,4 @@ public class Book extends Media implements Playable {
 		}
 	}
 	
-	public void play() {
-		//Do nothing here 
-		System.out.println("Can't play book");
-	}
-
 }

@@ -59,7 +59,7 @@ public class CartScreenController {
 			@Override
 			public void changed(ObservableValue<? extends Media> observable, Media oldValue, Media newValue) {
 				if (newValue != null) {
-
+					updateButtonBar(newValue);
 				}
 			}
 		});
