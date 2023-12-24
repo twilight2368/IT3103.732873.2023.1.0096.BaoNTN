@@ -50,6 +50,11 @@ public class Store {
 		return (ArrayList<Media>) itemOrdered;
 	}
 	
+	public static void display() {
+		for (Media media : itemOrdered) {
+			System.out.println(media);
+		}
+	}
 	
 
 }
