@@ -37,13 +37,11 @@ public class StoreScreen extends JFrame {
 
 	private Store store;
 	private Cart cart;
-	private CartScreen cartScreen;
 
-	public StoreScreen(Store store, Cart cart) {
+	public StoreScreen(Store store) {
 		// TODO Auto-generated constructor stub
 		this.store = store;
 		this.cart = cart;
-		cartScreen = new CartScreen(cart);
 		
 		Container cp = getContentPane();
 		
@@ -61,7 +59,6 @@ public class StoreScreen extends JFrame {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Store store = new Store();
-		Cart cart = new Cart();
 		
 		DigitalVideoDisc dvd1 = new DigitalVideoDisc("DVD1'S Title", null, 76.0f);
 		store.addMedia(dvd1);
@@ -82,7 +79,7 @@ public class StoreScreen extends JFrame {
 		CompactDisc cd9 = new CompactDisc("CD9's Title", null, 95.0f);
 		store.addMedia(cd9);
 		
-		new StoreScreen(store, cart);
+		new StoreScreen(store);
 	}
 
 	JPanel createNorth() {
@@ -98,31 +95,18 @@ public class StoreScreen extends JFrame {
 		JMenu menu = new JMenu("Options");
 
 		JMenu smUpdateStore = new JMenu("Update store");
-		JMenuItem addBookItem = new JMenuItem("Add Book");
-		JMenuItem addCDItem = new JMenuItem("Add CD");
-		JMenuItem addDVDItem = new JMenuItem("Add DVD");
-		
-		addBookItem.addActionListener(new MenuItemListener());
-		addCDItem.addActionListener(new MenuItemListener());
-		addDVDItem.addActionListener(new MenuItemListener());
-		
-		smUpdateStore.add(addBookItem);
-		smUpdateStore.add(addCDItem);
-		smUpdateStore.add(addDVDItem);
+		smUpdateStore.add(new JMenuItem("Add Book"));
+		smUpdateStore.add(new JMenuItem("Add CD"));
+		smUpdateStore.add(new JMenuItem("Add DVD"));
 
 		menu.add(smUpdateStore);
-		
-		JMenuItem viewStoreItem = new JMenuItem("View store");
-		JMenuItem viewCartItem = new JMenuItem("View cart");
-		viewStoreItem.addActionListener(new MenuItemListener());
-		viewCartItem.addActionListener(new MenuItemListener());
-		menu.add(viewStoreItem);
-		menu.add(viewCartItem);
+		menu.add(new JMenuItem("View store"));
+		menu.add(new JMenuItem("View cart").addActionListener(new MenuItemListener()));
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
 		menuBar.add(menu);
-		
+
 		return menuBar;
 	}
 	
@@ -146,7 +130,7 @@ public class StoreScreen extends JFrame {
 	            case "View store":
 	            	break;
 	            case "View cart":
-	            	cartScreen = new CartScreen(cart);
+	            	CartScreen cartScreen = new CartScreen(cart);
 	            	break;
 	            default:
 	                break;
@@ -164,32 +148,33 @@ public class StoreScreen extends JFrame {
 		title.setForeground(Color.CYAN);
 
 		JButton cartBtn = new JButton("View cart");
-		cartBtn.addActionListener(new ButtonViewCartListener());
+		cartBtn.addActionListener(new ButtonViewCartListener(cart));
 		cartBtn.setPreferredSize(new Dimension(100, 50));
 		cartBtn.setMaximumSize(new Dimension(100, 50));
 
 		header.add(Box.createRigidArea(new Dimension(10, 10)));
 		header.add(title);
 		header.add(Box.createHorizontalGlue());
-		header.add(cartBtn);
+		//header.add(cart);
 		header.add(Box.createRigidArea(new Dimension(10, 10)));
-		
-		
+
 		return header;
 
 	}
 	
 	private class ButtonViewCartListener implements ActionListener{
-		
-		public ButtonViewCartListener() {
+		Cart cart;
+
+		public ButtonViewCartListener(Cart cart) {
 			super();
 			// TODO Auto-generated constructor stub
+			this.cart = cart;
 		}
 		
 		public void actionPerformed(ActionEvent event) {
 			String button = event.getActionCommand();
 			if (button.equals("View cart")) {
-				cartScreen = new CartScreen(cart);
+				CartScreen cartScreen = new CartScreen(cart);
 			}
 		}
 		
@@ -248,21 +233,18 @@ public class StoreScreen extends JFrame {
 		
 		private class ButtonListener implements ActionListener{
 			Media media;
-			
 						
 			public ButtonListener(Media media) {
 				super();
 				this.media = media;
 			}
-			
-			
+
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				String button = event.getActionCommand();
 				if (button.equals("Add to cart")) {
+					Cart cart = new Cart();
 					cart.addMedia(media);
-					cartScreen.controller.updateCostLabel();
-					
 				}else if (button.equals("Play")) {
 					JDialog dialog = new JDialog();
 					JLabel label = new JLabel(media.toString());
@@ -275,5 +257,5 @@ public class StoreScreen extends JFrame {
 		
 		
 	}
-	
+
 }

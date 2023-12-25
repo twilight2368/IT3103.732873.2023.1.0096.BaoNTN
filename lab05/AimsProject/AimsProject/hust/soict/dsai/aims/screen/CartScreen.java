@@ -1,7 +1,10 @@
 package hust.soict.dsai.aims.screen;
 
+<<<<<<< HEAD
 import java.awt.Dimension;
 import javafx.scene.control.Label;
+=======
+>>>>>>> parent of f5aa519 (now)
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -19,16 +22,12 @@ import javafx.scene.Scene;
 
 public class CartScreen extends JFrame {
 	private Cart cart;
-	public CartScreenController controller;
-	Label costLabel;
 
 	public CartScreen(Cart cart) {
 		// TODO Auto-generated constructor stub
 		super();
 		this.cart = cart;
-		controller = new CartScreenController(cart);
-		costLabel = controller.getTotalcostID();
-
+		
 		JFXPanel fxPanel = new JFXPanel();
 
 		this.add(fxPanel);
@@ -36,7 +35,7 @@ public class CartScreen extends JFrame {
 		this.setTitle("Cart");
 
 		this.setVisible(true);
-		this.setSize(new Dimension(1024,768));
+
 		Platform.runLater(new Runnable() {
 
 			@Override
@@ -44,8 +43,8 @@ public class CartScreen extends JFrame {
 				// TODO Auto-generated method stub
 				try {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("cart.fxml"));
-					loader.setController(controller);
-					costLabel.setText("$" + cart.totalCost());
+					CartScreenController controller = new CartScreenController(cart);
+					loader.setController(controller); 				
 					Parent root = loader.load();
 					fxPanel.setScene(new Scene(root));
 
