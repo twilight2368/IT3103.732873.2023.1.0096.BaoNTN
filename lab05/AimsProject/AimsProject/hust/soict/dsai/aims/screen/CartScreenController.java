@@ -3,9 +3,12 @@ package hust.soict.dsai.aims.screen;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
+
+import java.awt.event.ActionListener;
 import java.util.function.Predicate;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
@@ -24,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -52,18 +56,21 @@ public class CartScreenController {
 
 	@FXML
 	private Button btnRemove;
-	
-    @FXML
-    private RadioButton radioBtnFilterId;
 
-    @FXML
-    private RadioButton radioBtnFilterTitle;
+	@FXML
+	private RadioButton radioBtnFilterId;
 
-    @FXML
-    private TextField tfFilter;
-    
-    @FXML
-    private Label totalcostID;
+	@FXML
+	private RadioButton radioBtnFilterTitle;
+
+	@FXML
+	private TextField tfFilter;
+
+	@FXML
+	private Label totalcostID;
+
+	@FXML
+	private Button orderBtnID;
 
 	public CartScreenController(Cart cart) {
 		// TODO Auto-generated constructor stub
@@ -73,16 +80,14 @@ public class CartScreenController {
 
 	@FXML
 	private void initialize() {
-		
+
 		colMediaTitle.setCellValueFactory(new PropertyValueFactory<Media, String>("title"));
 		colMediaCategory.setCellValueFactory(new PropertyValueFactory<Media, String>("category"));
 		colMediaCost.setCellValueFactory(new PropertyValueFactory<Media, String>("cost"));
 
 		tblMedia.setItems(this.cart.getItemsOrdered());
-		FloatProperty totalCost =  new SimpleFloatProperty(this.cart.totalCost());
+		FloatProperty totalCost = new SimpleFloatProperty(this.cart.totalCost());
 		totalcostID.setText("$" + cart.totalCost());
-		
-		
 
 		btnPlay.setVisible(false);
 		btnRemove.setVisible(false);
@@ -95,88 +100,69 @@ public class CartScreenController {
 				}
 			}
 		});
-       
-		tfFilter.textProperty().addListener( new ChangeListener<String>() {
+
+		tfFilter.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> oservable, String oldValue, String newValue) {
 				showFilteredMedia(newValue);
 			}
 		});
-		
-		cart.getItemsOrdered().addListener((ListChangeListener.Change<? extends Media> change) -> {		   
+
+		cart.getItemsOrdered().addListener((ListChangeListener.Change<? extends Media> change) -> {
 			Platform.runLater(() -> {
-			    totalcostID.setText("$" + cart.totalCost());
+				totalcostID.setText("$" + cart.totalCost());
 			});
 		});
 
-		
 	}
+
 	
-	
+	@FXML
+    void orderBtnClicked(ActionEvent event) {
+		cart.removeAllMedia();
+		JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+		JOptionPane.showMessageDialog(frame, "Cart removed" ,"Order Placed", JOptionPane.INFORMATION_MESSAGE);
+    }
+
 	void updateButtonBar(Media media) {
 		btnRemove.setVisible(true);
 		if (media instanceof Playable) {
 			btnPlay.setVisible(true);
-		}else {
+		} else {
 			btnPlay.setVisible(false);
 		}
 	}
+
+	@FXML
+	void btnRemovePressed(ActionEvent event) {
+		Media media = tblMedia.getSelectionModel().getSelectedItem();
+		cart.removeMedia(media);
+	}
+
+	void showFilteredMedia(String search) {
+		ObservableList<Media> sort_cartList = cart.getItemsOrdered();
+		FilteredList<Media> filtedData = new FilteredList<>(sort_cartList);
+
+		filtedData.setPredicate(media -> {
+			if (search == null || search.isEmpty() || search.length() == 0) {
+				return true;
+			} else {
+				if (radioBtnFilterId.isSelected()) {
+					return media.getId() == Integer.parseInt(search);
+				}
+
+				if (radioBtnFilterTitle.isSelected()) {
+					return media.getTitle().toLowerCase().contains(search.toLowerCase());
+				}
+
+				return false;
+			}
+		});
+
+		tblMedia.setItems(filtedData);
+
+	}
 	
-    @FXML
-    void btnRemovePressed(ActionEvent event) {
-    	Media media = tblMedia.getSelectionModel().getSelectedItem();
-    	cart.removeMedia(media);
-    }
-    
-    void showFilteredMedia(String search){
-    	ObservableList<Media> sort_cartList = cart.getItemsOrdered();
-    	FilteredList<Media> filtedData = new FilteredList<>(sort_cartList);
-    	
-        filtedData.setPredicate(media -> {
-        	if (search == null || search.isEmpty() || search.length() == 0) {
-                return true;
-            }else {
-            	if (radioBtnFilterId.isSelected()) {
-    				return media.getId() == Integer.parseInt(search);
-    			}
-            	
-            	if (radioBtnFilterTitle.isSelected()) {
-    				return media.getTitle().toLowerCase().contains(search.toLowerCase());
-    			}
-            	
-            	return false;
-            }
-        });
-         
-       tblMedia.setItems(filtedData);
-       
-    		
-    }
-    
+	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

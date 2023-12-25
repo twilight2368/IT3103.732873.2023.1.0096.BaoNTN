@@ -97,13 +97,28 @@ public class StoreScreen extends JFrame {
 		JMenu menu = new JMenu("Options");
 
 		JMenu smUpdateStore = new JMenu("Update store");
-		smUpdateStore.add(new JMenuItem("Add Book"));
-		smUpdateStore.add(new JMenuItem("Add CD"));
-		smUpdateStore.add(new JMenuItem("Add DVD"));
+		JMenuItem addBookItem = new JMenuItem("Add Book");
+		JMenuItem addCDItem = new JMenuItem("Add CD");
+		JMenuItem addDVDItem = new JMenuItem("Add DVD");
+		
+		addBookItem.addActionListener(new MenuItemListener());
+		addCDItem.addActionListener(new MenuItemListener());
+		addDVDItem.addActionListener(new MenuItemListener());
+		
+		smUpdateStore.add(addBookItem);
+		smUpdateStore.add(addCDItem);
+		smUpdateStore.add(addDVDItem);
 
 		menu.add(smUpdateStore);
-		menu.add(new JMenuItem("View store"));
-		menu.add(new JMenuItem("View cart"));
+		
+		JMenuItem viewStoreItem = new JMenuItem("View store");
+		viewStoreItem.addActionListener(new MenuItemListener());
+		
+		JMenuItem viewCartItem = new JMenuItem("View cart");
+		viewCartItem.addActionListener(new MenuItemListener());
+		
+		menu.add(viewStoreItem);
+		menu.add(viewCartItem);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -127,7 +142,7 @@ public class StoreScreen extends JFrame {
 	                // Add CD logic
 	                break;
 	            case "Add DVD":
-	                // Add DVD logic
+	                AddDVDScreen addDVDScreen = new AddDVDScreen(store);
 	                break;
 	            case "View store":
 	            	break;
@@ -177,6 +192,7 @@ public class StoreScreen extends JFrame {
 			String button = event.getActionCommand();
 			if (button.equals("View cart")) {
 				CartScreen cartScreen = new CartScreen(cart);
+				//setVisible(false);
 			}
 		}
 		
@@ -185,7 +201,7 @@ public class StoreScreen extends JFrame {
 	JPanel createCenter() {
 
 		JPanel center = new JPanel();
-		center.setLayout(new GridLayout(3, 3, 2, 2));
+		center.setLayout(new GridLayout(4, 4, 2, 2));
 		ArrayList<Media> mediaInStore = store.getItemsInStore();
 		for (int i = 0; i < 9; i++) {
 			MediaStore cell = new MediaStore(mediaInStore.get(i));

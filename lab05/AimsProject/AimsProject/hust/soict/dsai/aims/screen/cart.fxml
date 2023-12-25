@@ -23,21 +23,21 @@
       <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="Options">
-                  <items>
+               <menus>
+                  <Menu mnemonicParsing="false" text="Options">
+                     <items>
                         <Menu mnemonicParsing="false" text="Update store">
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="Add book" />
-                          <MenuItem mnemonicParsing="false" text="Add CD" />
+                           <items>
                               <MenuItem mnemonicParsing="false" text="Add DVD" />
-                          </items>
+                              <MenuItem mnemonicParsing="false" text="Add book" />
+                              <MenuItem mnemonicParsing="false" text="Add CD" />
+                           </items>
                         </Menu>
-                        <MenuItem mnemonicParsing="false" text="View Store" />
-                        <MenuItem mnemonicParsing="false" text="View Cart" />
-                  </items>
-                </Menu>
-              </menus>
+                        <MenuItem mnemonicParsing="false" text="View store" />
+                        <MenuItem mnemonicParsing="false" text="View cart" />
+                     </items>
+                  </Menu>
+               </menus>
             </MenuBar>
             <Label text="CART_BAO_NTN_0096" textFill="AQUA">
                <font>
@@ -116,7 +116,7 @@
                   </Label>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="118.0" style="-fx-background-color: red;" text="Place Order" textFill="WHITE">
+            <Button fx:id="orderBtnID" mnemonicParsing="false" onAction="#orderBtnClicked" prefHeight="41.0" prefWidth="118.0" style="-fx-background-color: red;" text="Place Order" textFill="WHITE">
                <VBox.margin>
                   <Insets left="25.0" top="10.0" />
                </VBox.margin>

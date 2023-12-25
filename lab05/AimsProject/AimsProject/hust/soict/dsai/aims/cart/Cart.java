@@ -32,6 +32,7 @@ public class Cart {
 			System.out.println("Removed successfully");
 		}
 	}
+	
 	public float totalCost() {
 		float cost = 0;
 		for (Media media : itemOrdered) {
