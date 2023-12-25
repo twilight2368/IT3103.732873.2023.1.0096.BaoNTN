@@ -2,6 +2,7 @@ package hust.soict.dsai.aims.screen;
 
 import javafx.event.ActionEvent;
 
+import javafx.scene.control.Label;
 import java.util.function.Predicate;
 
 import javax.swing.JFrame;
@@ -9,8 +10,12 @@ import javax.swing.JFrame;
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -22,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.application.Platform;
 
 public class CartScreenController {
 	private Cart cart;
@@ -55,6 +61,9 @@ public class CartScreenController {
 
     @FXML
     private TextField tfFilter;
+    
+    @FXML
+    private Label totalcostID;
 
 	public CartScreenController(Cart cart) {
 		// TODO Auto-generated constructor stub
@@ -64,12 +73,16 @@ public class CartScreenController {
 
 	@FXML
 	private void initialize() {
-		totalcostID.setText("$" + this.cart.totalCost());
+		
 		colMediaTitle.setCellValueFactory(new PropertyValueFactory<Media, String>("title"));
 		colMediaCategory.setCellValueFactory(new PropertyValueFactory<Media, String>("category"));
 		colMediaCost.setCellValueFactory(new PropertyValueFactory<Media, String>("cost"));
 
 		tblMedia.setItems(this.cart.getItemsOrdered());
+		FloatProperty totalCost =  new SimpleFloatProperty(this.cart.totalCost());
+		totalcostID.setText("$" + cart.totalCost());
+		
+		
 
 		btnPlay.setVisible(false);
 		btnRemove.setVisible(false);
@@ -89,20 +102,16 @@ public class CartScreenController {
 				showFilteredMedia(newValue);
 			}
 		});
+		
+		cart.getItemsOrdered().addListener((ListChangeListener.Change<? extends Media> change) -> {		   
+			Platform.runLater(() -> {
+			    totalcostID.setText("$" + cart.totalCost());
+			});
+		});
+
+		
 	}
 	
-	 /**
-	 * @return the totalcostID
-	 */
-	public Label getTotalcostID() {
-		return totalcostID;
-	}
-
-
-
-	public void updateCostLabel() {
-	        totalcostID.setText("$" + this.cart.totalCost());
-	 }
 	
 	void updateButtonBar(Media media) {
 		btnRemove.setVisible(true);

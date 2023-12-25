@@ -33,12 +33,13 @@ import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import hust.soict.dsai.aims.store.Store;
 
+
 public class StoreScreen extends JFrame {
 
 	private Store store;
 	private Cart cart;
 
-	public StoreScreen(Store store) {
+	public StoreScreen(Store store, Cart cart) {
 		// TODO Auto-generated constructor stub
 		this.store = store;
 		this.cart = cart;
@@ -59,6 +60,7 @@ public class StoreScreen extends JFrame {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Store store = new Store();
+		Cart cart = new Cart();
 		
 		DigitalVideoDisc dvd1 = new DigitalVideoDisc("DVD1'S Title", null, 76.0f);
 		store.addMedia(dvd1);
@@ -79,7 +81,7 @@ public class StoreScreen extends JFrame {
 		CompactDisc cd9 = new CompactDisc("CD9's Title", null, 95.0f);
 		store.addMedia(cd9);
 		
-		new StoreScreen(store);
+		new StoreScreen(store, cart);
 	}
 
 	JPanel createNorth() {
@@ -101,7 +103,7 @@ public class StoreScreen extends JFrame {
 
 		menu.add(smUpdateStore);
 		menu.add(new JMenuItem("View store"));
-		menu.add(new JMenuItem("View cart").addActionListener(new MenuItemListener()));
+		menu.add(new JMenuItem("View cart"));
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -155,7 +157,7 @@ public class StoreScreen extends JFrame {
 		header.add(Box.createRigidArea(new Dimension(10, 10)));
 		header.add(title);
 		header.add(Box.createHorizontalGlue());
-		//header.add(cart);
+		header.add(cartBtn);
 		header.add(Box.createRigidArea(new Dimension(10, 10)));
 
 		return header;
@@ -243,7 +245,6 @@ public class StoreScreen extends JFrame {
 			public void actionPerformed(ActionEvent event) {
 				String button = event.getActionCommand();
 				if (button.equals("Add to cart")) {
-					Cart cart = new Cart();
 					cart.addMedia(media);
 				}else if (button.equals("Play")) {
 					JDialog dialog = new JDialog();

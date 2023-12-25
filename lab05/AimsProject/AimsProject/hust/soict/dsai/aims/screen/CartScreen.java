@@ -1,10 +1,7 @@
 package hust.soict.dsai.aims.screen;
 
-<<<<<<< HEAD
 import java.awt.Dimension;
 import javafx.scene.control.Label;
-=======
->>>>>>> parent of f5aa519 (now)
 import java.io.IOException;
 
 import javax.swing.JFrame;
