@@ -109,7 +109,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="64.0" layoutY="10.0" text="0$">
+                  <Label fx:id="totalcostID" layoutX="64.0" layoutY="10.0" text="0$">
                      <font>
                         <Font size="24.0" />
                      </font>

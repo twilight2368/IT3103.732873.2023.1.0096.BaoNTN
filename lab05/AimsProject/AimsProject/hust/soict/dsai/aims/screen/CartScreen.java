@@ -1,5 +1,6 @@
 package hust.soict.dsai.aims.screen;
 
+import java.awt.Dimension;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -30,7 +31,7 @@ public class CartScreen extends JFrame {
 		this.setTitle("Cart");
 
 		this.setVisible(true);
-
+		this.setSize(new Dimension(1024,768));
 		Platform.runLater(new Runnable() {
 
 			@Override

@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 public class CartScreenController {
 	private Cart cart;
@@ -55,6 +56,9 @@ public class CartScreenController {
 
     @FXML
     private TextField tfFilter;
+    
+    @FXML
+    private Label totalcostID;
 
 	public CartScreenController(Cart cart) {
 		// TODO Auto-generated constructor stub
@@ -69,10 +73,11 @@ public class CartScreenController {
 		colMediaCost.setCellValueFactory(new PropertyValueFactory<Media, String>("cost"));
 
 		tblMedia.setItems(this.cart.getItemsOrdered());
+		totalcostID.setText("$" + this.cart.totalCost());
 
 		btnPlay.setVisible(false);
 		btnRemove.setVisible(false);
-
+		
 		tblMedia.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Media>() {
 			@Override
 			public void changed(ObservableValue<? extends Media> observable, Media oldValue, Media newValue) {
@@ -103,6 +108,7 @@ public class CartScreenController {
     void btnRemovePressed(ActionEvent event) {
     	Media media = tblMedia.getSelectionModel().getSelectedItem();
     	cart.removeMedia(media);
+    	totalcostID.setText("$" + this.cart.totalCost());
     }
     
     void showFilteredMedia(String search){
@@ -124,36 +130,10 @@ public class CartScreenController {
             	return false;
             }
         });
-         
+        
        tblMedia.setItems(filtedData);
        
     		
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
