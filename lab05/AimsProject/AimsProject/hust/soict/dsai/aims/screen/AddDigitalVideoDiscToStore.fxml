@@ -1,8 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Options">
+               <items>
+                  <Menu mnemonicParsing="false" text="Update store">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Add DVD" />
+                        <MenuItem mnemonicParsing="false" text="Add book" />
+                        <MenuItem mnemonicParsing="false" text="Add CD" />
+                     </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="View store" />
+                  <MenuItem mnemonicParsing="false" text="View cart" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <Pane prefHeight="269.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="306.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="36.0" prefWidth="600.0" text="ADD_DVD_BAO_NTN_0096">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane prefHeight="57.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="20.0" text="Title" />
+                        <TextField layoutX="75.0" layoutY="16.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="64.0" prefHeight="57.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="20.0" text="Category" />
+                        <TextField layoutX="75.0" layoutY="16.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="64.0" prefHeight="57.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="20.0" text="Cost" />
+                        <TextField layoutX="75.0" layoutY="16.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="64.0" prefHeight="57.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="20.0" text="Director" />
+                        <TextField layoutX="75.0" layoutY="16.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="64.0" prefHeight="0.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="20.0" layoutY="20.0" text="Length" />
+                        <TextField layoutX="75.0" layoutY="16.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <Button layoutX="258.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Add" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

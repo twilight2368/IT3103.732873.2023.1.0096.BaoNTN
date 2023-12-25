@@ -68,12 +68,12 @@ public class CartScreenController {
 
 	@FXML
 	private void initialize() {
+		totalcostID.setText("$" + this.cart.totalCost());
 		colMediaTitle.setCellValueFactory(new PropertyValueFactory<Media, String>("title"));
 		colMediaCategory.setCellValueFactory(new PropertyValueFactory<Media, String>("category"));
 		colMediaCost.setCellValueFactory(new PropertyValueFactory<Media, String>("cost"));
 
 		tblMedia.setItems(this.cart.getItemsOrdered());
-		totalcostID.setText("$" + this.cart.totalCost());
 
 		btnPlay.setVisible(false);
 		btnRemove.setVisible(false);
@@ -94,6 +94,19 @@ public class CartScreenController {
 			}
 		});
 	}
+	
+	 /**
+	 * @return the totalcostID
+	 */
+	public Label getTotalcostID() {
+		return totalcostID;
+	}
+
+
+
+	public void updateCostLabel() {
+	        totalcostID.setText("$" + this.cart.totalCost());
+	 }
 	
 	void updateButtonBar(Media media) {
 		btnRemove.setVisible(true);

@@ -37,11 +37,13 @@ public class StoreScreen extends JFrame {
 
 	private Store store;
 	private Cart cart;
+	private CartScreen cartScreen;
 
 	public StoreScreen(Store store, Cart cart) {
 		// TODO Auto-generated constructor stub
 		this.store = store;
 		this.cart = cart;
+		cartScreen = new CartScreen(cart);
 		
 		Container cp = getContentPane();
 		
@@ -144,7 +146,7 @@ public class StoreScreen extends JFrame {
 	            case "View store":
 	            	break;
 	            case "View cart":
-	            	CartScreen cartScreen = new CartScreen(cart);
+	            	cartScreen = new CartScreen(cart);
 	            	break;
 	            default:
 	                break;
@@ -154,8 +156,6 @@ public class StoreScreen extends JFrame {
 
 	JPanel createHeader() {
 		
-		Cart cart = this.cart;
-
 		JPanel header = new JPanel();
 		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 
@@ -164,7 +164,7 @@ public class StoreScreen extends JFrame {
 		title.setForeground(Color.CYAN);
 
 		JButton cartBtn = new JButton("View cart");
-		cartBtn.addActionListener(new ButtonViewCartListener(cart));
+		cartBtn.addActionListener(new ButtonViewCartListener());
 		cartBtn.setPreferredSize(new Dimension(100, 50));
 		cartBtn.setMaximumSize(new Dimension(100, 50));
 
@@ -180,18 +180,16 @@ public class StoreScreen extends JFrame {
 	}
 	
 	private class ButtonViewCartListener implements ActionListener{
-		Cart cart;
-
-		public ButtonViewCartListener(Cart cart) {
+		
+		public ButtonViewCartListener() {
 			super();
 			// TODO Auto-generated constructor stub
-			this.cart = cart;
 		}
 		
 		public void actionPerformed(ActionEvent event) {
 			String button = event.getActionCommand();
 			if (button.equals("View cart")) {
-				CartScreen cartScreen = new CartScreen(cart);
+				cartScreen = new CartScreen(cart);
 			}
 		}
 		
@@ -263,6 +261,8 @@ public class StoreScreen extends JFrame {
 				String button = event.getActionCommand();
 				if (button.equals("Add to cart")) {
 					cart.addMedia(media);
+					cartScreen.controller.updateCostLabel();
+					
 				}else if (button.equals("Play")) {
 					JDialog dialog = new JDialog();
 					JLabel label = new JLabel(media.toString());
