@@ -30,7 +30,7 @@ public class CartScreen extends JFrame {
 		this.add(fxPanel);
 
 		this.setTitle("Cart");
-
+		this.cartsetSize(1024, 768);
 		this.setVisible(true);
 
 		Platform.runLater(new Runnable() {
